@@ -1,70 +1,64 @@
-function addTodo() {
+const inputEl = document.getElementById('todoText');
+const addBtn = document.getElementById('addTodo');
+const deleteAllBtn = document.getElementById('deleteAll');
+const todoListEl = document.getElementById('list');
+let bool = true;
+let editItem;
 
-    var todoText = document.getElementById('todoText');
-    if (todoText.value.trim()) {
-        var listItem = document.createElement('li');
-        var listItemId = 'list-item-' + todoList.childNodes.length;
-        listItem.setAttribute('id', listItemId);
+//? Single Element Edit Handler
+const editHandler = (e) => {
+    inputEl.value = e.target.previousSibling.textContent;
+    bool = false;
+    addBtn.textContent = 'Save';
+    editItem = e.target;
+};
 
-        var editBtn = document.createElement('button');
-        var deleteBtn = document.createElement('button');
+//? Single Element Delete Handler
+const deleteHandler = (e) => {
+    if (bool) e.target.parentElement.remove();
+};
+
+//? Add and Edit Handler Function
+const addElementHandler = (e) => {
+    const inputValue = inputEl.value;
+
+    if (inputValue.trim() && bool) {
+        const liEl = document.createElement('li');
+        const editBtn = document.createElement('button');
+        const deleteBtn = document.createElement('button');
+
+        editBtn.addEventListener('click', editHandler);
+        deleteBtn.addEventListener('click', deleteHandler);
 
         editBtn.className = 'edit';
+        editBtn.textContent = 'edit';
         deleteBtn.className = 'delete';
+        deleteBtn.textContent = 'delete';
+        liEl.textContent = inputValue;
+        liEl.append(editBtn, deleteBtn);
+        todoListEl.appendChild(liEl);
 
-        editBtn.innerText = "Edit";
-        deleteBtn.innerText = "Delete";
-        editBtn.onclick = function(ev) {
-            console.log(ev)
-            return editListItem(listItemId);
-        };
-        deleteBtn.onclick = function() {
-            return deleteListItem(listItemId);
-        };
-        listItem.innerText = todoText.value;
-
-        todoList.appendChild(listItem);
-        listItem.appendChild(editBtn);
-        listItem.appendChild(deleteBtn);
-
-        todoText.value = "";
-    }
-}
-
-var todoList = document.getElementById('list');
-var addTodoBtn = document.getElementById('addTodo');
-var deleteAllBtn = document.getElementById('deleteAll');
-deleteAllBtn.onclick = deleteAllTodos;
-
-function deleteListItem(id) {
-    var listItemToDelete = document.getElementById(id);
-    todoList.removeChild(listItemToDelete);
-
-}
-
-function saveEdit(id) {
-    var todoText = document.getElementById('todoText');
-    var listItemToEdit = document.getElementById(id);
-    listItemToEdit.firstChild.nodeValue = todoText.value;
-    todoText.value = "";
-    addTodoBtn.innerText = "Add Todo";
-    addTodoBtn.onclick = addTodo;
-
-}
-
-function editListItem(id) {
-    var listItemToEdit = document.getElementById(id);
-    var todoText = document.getElementById('todoText');
-    var todoItemText = listItemToEdit.firstChild.nodeValue;
-    todoText.value = todoItemText;
-    addTodoBtn.innerText = 'Save';
-    addTodoBtn.onclick = function() {
-        return saveEdit(id);
+        inputEl.value = '';
     }
 
-}
+    if (inputValue.trim() && !bool) {
+        bool = true;
+        addBtn.textContent = 'Add Todo';
 
-function deleteAllTodos() {
-    todoList.innerHTML = "";
+        editItem.previousSibling.textContent = inputEl.value;
 
-}
+        inputEl.value = '';
+    }
+};
+
+//? Add New Element
+addBtn.addEventListener('click', addElementHandler);
+
+document.addEventListener('keypress', (e) => {
+    if (e.charCode === 13) addElementHandler();
+});
+
+//? Delete All Elements
+deleteAllBtn.addEventListener('click', (e) => {
+    if (bool) todoListEl.innerHTML = '';
+});

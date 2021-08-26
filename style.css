@@ -87,21 +87,23 @@ li {
     font-weight: bold;
     text-align: justify;
     width: 83%;
+    padding-left: 1rem;
 }
 
 .edit,
 .delete {
-    position: absolute;
     top: 0.1rem;
-    padding: 0.3rem;
     border: none;
-    border-radius: 20px;
-    color: #eee;
-    font-weight: bold;
     outline: none;
+    color: #eee;
     cursor: pointer;
-    box-shadow: 0.2rem 0.2rem 1rem transparent;
+    padding: 0.3rem;
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    border-radius: 20px;
     transition: all 0.5s ease;
+    box-shadow: 0.2rem 0.2rem 1rem transparent;
 }
 
 .edit:focus,
