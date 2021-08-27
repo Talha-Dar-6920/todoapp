@@ -8,7 +8,7 @@ body {
     box-sizing: border-box;
     padding: 3rem;
     min-height: 100vh;
-    background-image: linear-gradient( 235deg, lightseagreen, springgreen, lightseagreen);
+    background-image: linear-gradient(45deg, #640095, #dbc9e4);
     background-size: cover;
     font-family: 'Times New Roman', serif;
 }
@@ -59,7 +59,7 @@ body {
 }
 
 #addTodo {
-    background: purple;
+    background: #640095;
     position: absolute;
     right: 12rem;
     top: 3.3rem;
@@ -76,7 +76,7 @@ body {
 #list {
     margin: 3rem auto;
     width: 80vw;
-    list-style: -webkit-repeating-radial-gradient(purple, purple);
+    list-style: -webkit-repeating-radial-gradient(#47003a, #47003a);
     font-size: 1.6rem;
     color: white;
 }
@@ -127,7 +127,7 @@ li {
     padding: 0.4rem 2rem;
     right: -6.5rem;
     margin-right: 2rem;
-    background: purple;
+    background: #640095;
 }
 
 .delete {
