@@ -12,5 +12,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TODO_29872 }}'
-          projectId: todo-29872
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CALCULATOR_5102B }}'
+          projectId: calculator-5102b
